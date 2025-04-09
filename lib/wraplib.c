@@ -10,3 +10,15 @@ const char * Inet_ntop(int family, const void *addrptr, char *strptr, size_t len
 
   return ptr;
 }
+
+
+void Inet_pton(int family, const char* strptr, struct in_addr* addr)
+{
+  int n;
+
+  if ((n = inet_pton(family, strptr, addr)) < 0)
+    err_sys("inet_pton error for %s", strptr);
+  else if (n == 0)
+    err_quit("inet_pton error for %s", strptr);
+
+}

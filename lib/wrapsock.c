@@ -13,6 +13,12 @@ void Bind(int sockfd, const struct sockaddr *sockaddr, socklen_t sockaddr_len){
     err_sys("socket bind error");
 }
 
+void Listen(int sockfd, int backlog)
+{
+  if (listen(sockfd, backlog) != 0)
+    err_sys("socket listen error");
+}
+
 int Accept(int fd, struct sockaddr *sa, socklen_t *salenptr){
   int n;
 again:
@@ -28,4 +34,10 @@ again:
   }
 
   return n;
+}
+
+void Connect(int fd, const struct sockaddr *sa, socklen_t salen)
+{
+  if (connect(fd, sa, salen) < 0)
+    err_sys("connect error");
 }

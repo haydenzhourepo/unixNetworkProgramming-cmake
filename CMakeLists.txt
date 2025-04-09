@@ -7,3 +7,4 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
 
 add_subdirectory(lib)
 add_subdirectory(intro)
+add_subdirectory(tcpcliserv)

@@ -16,9 +16,11 @@ int main(int argc, char ** argv) {
 
   Bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 
+  Listen(listenfd, LISTENQ);
+
   for (;;){
     len = sizeof(cliaddr);
-    connfd = Accept(listenfd, &cliaddr, &len);
+    connfd = Accept(listenfd, (struct sockaddr *)&cliaddr, &len);
     printf("connection from %s, port %d\n",
            Inet_ntop(AF_INET, &cliaddr.sin_addr, buff, sizeof(buff)),
            ntohs(cliaddr.sin_port));
