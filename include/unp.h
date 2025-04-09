@@ -16,6 +16,15 @@
 #define MAXLINE 4096 /* max text line length */
 #define LISTENQ 1024
 
+int Socket(int family, int type, int protocol);
+void Bind(int sockfd, const struct sockaddr *sockaddr, socklen_t sockaddr_len);
+int Accept(int fd, struct sockaddr *sa, socklen_t *salenptr);
+
+void Write(int fd, void *ptr, size_t nbytes);
+void Close(int fd);
+
+const char * Inet_ntop(int family, const void *addrptr, char *strptr, size_t len);
+char *sock_ntop(const struct sockaddr *sockaddr, socklen_t addrlen);
 
 void err_quit(const char *msg, ...);
 

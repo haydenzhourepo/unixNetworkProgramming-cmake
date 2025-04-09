@@ -4,6 +4,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # 添加编译警告选项，提升代码健壮性
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic")
 
+link_libraries(unp)
 add_executable(daytimetcpcli daytimetcpcli.c)
 target_link_libraries(daytimetcpcli PRIVATE unp)
 
@@ -15,3 +16,5 @@ target_link_libraries(daytimetcpsrv PRIVATE unp)
 
 add_executable(byteorder byteorder.c)
 target_link_libraries(byteorder PRIVATE unp)
+
+add_executable(daytimetcpsrv1 daytimetcpsrv1.c)
