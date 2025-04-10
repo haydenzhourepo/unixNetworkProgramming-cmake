@@ -20,6 +20,10 @@
 #define LISTENQ 1024
 #define SERV_PORT 9877
 
+#ifndef INFTIM
+#define INFTIM (-1)
+#endif
+
 typedef void Sigfunc(int);
 #define	min(a,b)	((a) < (b) ? (a) : (b))
 #define	max(a,b)	((a) > (b) ? (a) : (b))
