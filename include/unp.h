@@ -14,12 +14,15 @@
 #include <signal.h>
 #include <wait.h>
 #include <time.h>
+#include <math.h>
 
 #define MAXLINE 4096 /* max text line length */
 #define LISTENQ 1024
 #define SERV_PORT 9877
 
 typedef void Sigfunc(int);
+#define	min(a,b)	((a) < (b) ? (a) : (b))
+#define	max(a,b)	((a) > (b) ? (a) : (b))
 Sigfunc *Signal(int signo, Sigfunc *func);
 
 int Socket(int family, int type, int protocol);
@@ -29,9 +32,13 @@ int Accept(int fd, struct sockaddr *sa, socklen_t *salenptr);
 
 void Write(int fd, void *ptr, size_t nbytes);
 void Close(int fd);
+ssize_t Read(int fd, void *ptr, size_t nbytes);
 
 void Writen(int fd, void *ptr, size_t nbytes);
 void Connect(int fd, const struct sockaddr *sa, socklen_t salen);
+void Shutdown(int fd, int how);
+int Select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
+       struct timeval *timeout);
 
 const char * Inet_ntop(int family, const void *addrptr, char *strptr, size_t len);
 void Inet_pton(int family, const char* strptr, struct in_addr* addr);
