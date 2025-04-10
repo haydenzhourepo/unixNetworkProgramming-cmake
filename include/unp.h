@@ -44,6 +44,12 @@ void Shutdown(int fd, int how);
 int Select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
        struct timeval *timeout);
 
+void
+Sendto(int fd, const void *ptr, size_t nbytes, int flags,
+       const struct sockaddr *sa, socklen_t salen);
+ssize_t Recvfrom(int fd, void *ptr, size_t nbytes, int flags,
+         struct sockaddr *sa, socklen_t *salenptr);
+
 const char * Inet_ntop(int family, const void *addrptr, char *strptr, size_t len);
 void Inet_pton(int family, const char* strptr, struct in_addr* addr);
 char *sock_ntop(const struct sockaddr *sockaddr, socklen_t addrlen);
@@ -52,6 +58,10 @@ char *sock_ntop(const struct sockaddr *sockaddr, socklen_t addrlen);
 void str_echo(int sockfd);
 void str_cli(FILE *fp, int sockfd);
 
+
+// udp
+void dg_cli(FILE *fp, int sockfd, struct sockaddr * sa, int sa_len);
+void dg_echo(int sockfd, struct sockaddr* pcliaddr, socklen_t clilen);
 
 // stdio
 char * Fgets(char *ptr, int n, FILE *stream);
