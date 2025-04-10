@@ -63,9 +63,7 @@ Readline(int fd, void *ptr, size_t maxlen);
 
 // error
 void err_quit(const char *msg, ...);
-static void
-err_doit(int errnoflag, int error, const char*fmt, va_list ap);
-
+void err_ret(const char *fmt, ...);
 void err_sys(const char *fmt, ...);
 
 #endif	/* __unp_h */

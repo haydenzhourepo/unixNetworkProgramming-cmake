@@ -1,7 +1,7 @@
 #include "unp.h"
 
 
-#define MAXLINE 4096 /* max text line length */
+static void err_doit(int, const char *, va_list);
 
 void err_quit(const char *msg, ...) {
   va_list args;
@@ -12,22 +12,36 @@ void err_quit(const char *msg, ...) {
 }
 
 static void
-err_doit(int errnoflag, int error, const char*fmt, va_list ap){
-  char buf[MAXLINE];
-  vsnprintf(buf, MAXLINE, fmt, ap);
-  if (errnoflag)
-    snprintf(buf + strlen(buf), MAXLINE- strlen(buf), ": %s", strerror(error));
+err_doit(int errnoflag, const char *fmt, va_list ap)
+{
+  int		errno_save;
+  char	buf[MAXLINE];
 
+  errno_save = errno;		/* value caller might want printed */
+  vsprintf(buf, fmt, ap);
+  if (errnoflag)
+    sprintf(buf+strlen(buf), ": %s", strerror(errno_save));
   strcat(buf, "\n");
-  fflush(stdout);
+  fflush(stdout);		/* in case stdout and stderr are the same */
   fputs(buf, stderr);
-  fflush(NULL);
+  fflush(stderr);		/* SunOS 4.1.* doesn't grok NULL argument */
+  return;
 }
 
 void err_sys(const char *fmt, ...) {
   va_list ap;
   va_start(ap, fmt);
-  err_doit(1, errno, fmt, ap);
+  err_doit(1, fmt, ap);
   va_end(ap);
   exit(1);
+}
+
+void err_ret(const char *fmt, ...)
+{
+  va_list		ap;
+
+  va_start(ap, fmt);
+  err_doit(1, fmt, ap);
+  va_end(ap);
+  return;
 }
