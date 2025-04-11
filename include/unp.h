@@ -9,6 +9,8 @@
 #include <stdarg.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+//#include <netinet/sctp.h>
+#include <sys/un.h>
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
@@ -52,8 +54,8 @@ ssize_t Recvfrom(int fd, void *ptr, size_t nbytes, int flags,
 
 const char * Inet_ntop(int family, const void *addrptr, char *strptr, size_t len);
 void Inet_pton(int family, const char* strptr, struct in_addr* addr);
-char *sock_ntop(const struct sockaddr *sockaddr, socklen_t addrlen);
-
+char *
+Sock_ntop(const struct sockaddr *sa, socklen_t salen);
 
 void str_echo(int sockfd);
 void str_cli(FILE *fp, int sockfd);
