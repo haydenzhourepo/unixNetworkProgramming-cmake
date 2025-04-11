@@ -85,6 +85,10 @@ FILE * Fopen(const char *filename, const char *mode);
 int Tcp_connect(const char *host, const char *serv);
 int Tcp_listen(const char *host, const char *serv, socklen_t *addrlenp);
 
+
+// daemon
+int daemon_init(const char *pname, int facility);
+
 ssize_t
 Readline(int fd, void *ptr, size_t maxlen);
 
@@ -92,5 +96,5 @@ Readline(int fd, void *ptr, size_t maxlen);
 void err_quit(const char *msg, ...);
 void err_ret(const char *fmt, ...);
 void err_sys(const char *fmt, ...);
-
+void err_msg(const char *fmt, ...);
 #endif	/* __unp_h */
