@@ -23,6 +23,9 @@
 #define MAXLINE 4096 /* max text line length */
 #define LISTENQ 1024
 #define SERV_PORT 9877
+#define	SERV_PORT_STR	"9877"			/* TCP and UDP client-servers */
+#define	UNIXSTR_PATH	"/tmp/unix.str"	/* Unix domain stream cli-serv */
+#define	UNIXDG_PATH		"/tmp/unix.dg"	/* Unix domain datagram cli-serv */
 
 #ifndef INFTIM
 #define INFTIM (-1)
@@ -66,6 +69,8 @@ const char * Inet_ntop(int family, const void *addrptr, char *strptr, size_t len
 void Inet_pton(int family, const char* strptr, struct in_addr* addr);
 char *
 Sock_ntop(const struct sockaddr *sa, socklen_t salen);
+char *
+Sock_ntop_host(const struct sockaddr *sa, socklen_t salen);
 
 void str_echo(int sockfd);
 void str_cli(FILE *fp, int sockfd);
@@ -74,7 +79,7 @@ void str_cli(FILE *fp, int sockfd);
 // udp
 void dg_cli(FILE *fp, int sockfd, struct sockaddr * sa, int sa_len);
 void dg_echo(int sockfd, struct sockaddr* pcliaddr, socklen_t clilen);
-
+void broadcase_gd_cli(FILE *fp, int sockfd, const struct sockaddr *pservaddr, socklen_t servlen);
 // stdio
 char * Fgets(char *ptr, int n, FILE *stream);
 void Fputs(const char *ptr, FILE *stream);
