@@ -11,6 +11,8 @@
 #include <netinet/in.h>
 //#include <netinet/sctp.h>
 #include <sys/un.h>
+#include "netdb.h"
+
 #include <string.h>
 #include <unistd.h>
 #include <signal.h>
@@ -52,6 +54,14 @@ Sendto(int fd, const void *ptr, size_t nbytes, int flags,
 ssize_t Recvfrom(int fd, void *ptr, size_t nbytes, int flags,
          struct sockaddr *sa, socklen_t *salenptr);
 
+void
+Getpeername(int fd, struct sockaddr *sa, socklen_t *salenptr);
+void
+Getsockname(int fd, struct sockaddr *sa, socklen_t *salenptr);
+void
+Setsockopt(int fd, int level, int optname, const void *optval, socklen_t optlen);
+
+
 const char * Inet_ntop(int family, const void *addrptr, char *strptr, size_t len);
 void Inet_pton(int family, const char* strptr, struct in_addr* addr);
 char *
@@ -69,6 +79,11 @@ void dg_echo(int sockfd, struct sockaddr* pcliaddr, socklen_t clilen);
 char * Fgets(char *ptr, int n, FILE *stream);
 void Fputs(const char *ptr, FILE *stream);
 FILE * Fopen(const char *filename, const char *mode);
+
+
+//
+int Tcp_connect(const char *host, const char *serv);
+int Tcp_listen(const char *host, const char *serv, socklen_t *addrlenp);
 
 ssize_t
 Readline(int fd, void *ptr, size_t maxlen);

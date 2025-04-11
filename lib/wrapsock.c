@@ -93,3 +93,24 @@ Sendto(int fd, const void *ptr, size_t nbytes, int flags,
   if (sendto(fd, ptr, nbytes, flags, sa, salen) != (ssize_t)nbytes)
     err_sys("sendto error");
 }
+
+void
+Getpeername(int fd, struct sockaddr *sa, socklen_t *salenptr)
+{
+  if (getpeername(fd, sa, salenptr) < 0)
+    err_sys("getpeername error");
+}
+
+void
+Getsockname(int fd, struct sockaddr *sa, socklen_t *salenptr)
+{
+  if (getsockname(fd, sa, salenptr) < 0)
+    err_sys("getsockname error");
+}
+
+void
+Setsockopt(int fd, int level, int optname, const void *optval, socklen_t optlen)
+{
+  if (setsockopt(fd, level, optname, optval, optlen) < 0)
+    err_sys("setsockopt error");
+}

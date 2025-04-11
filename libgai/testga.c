@@ -1,5 +1,4 @@
 #include	"unp.h"
-#include "netdb.h"
 
 /*
  * Test program for getaddrinfo() and getnameinfo().
