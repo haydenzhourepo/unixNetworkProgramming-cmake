@@ -19,6 +19,7 @@
 #include <wait.h>
 #include <time.h>
 #include <math.h>
+#include <stdint.h>
 
 #define MAXLINE 4096 /* max text line length */
 #define LISTENQ 1024
@@ -71,11 +72,13 @@ char *
 Sock_ntop(const struct sockaddr *sa, socklen_t salen);
 char *
 Sock_ntop_host(const struct sockaddr *sa, socklen_t salen);
+int
+sock_get_port(const struct sockaddr *sa, socklen_t salen);
 
 void str_echo(int sockfd);
 void str_cli(FILE *fp, int sockfd);
 
-
+struct addrinfo* Host_serv(const char *host, const char *serv, int family, int socktype);
 // udp
 void dg_cli(FILE *fp, int sockfd, struct sockaddr * sa, int sa_len);
 void dg_echo(int sockfd, struct sockaddr* pcliaddr, socklen_t clilen);
@@ -102,4 +105,8 @@ void err_quit(const char *msg, ...);
 void err_ret(const char *fmt, ...);
 void err_sys(const char *fmt, ...);
 void err_msg(const char *fmt, ...);
+
+
+uint16_t
+in_cksum(uint16_t *addr, int len);
 #endif	/* __unp_h */
