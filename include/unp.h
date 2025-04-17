@@ -109,4 +109,6 @@ void err_msg(const char *fmt, ...);
 
 uint16_t
 in_cksum(uint16_t *addr, int len);
+
+void tv_sub(struct timeval *out, struct timeval *in);
 #endif	/* __unp_h */

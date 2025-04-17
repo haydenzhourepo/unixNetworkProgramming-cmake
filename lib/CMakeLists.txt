@@ -9,7 +9,7 @@ add_library(unp SHARED unp.c sock_ntop.c wrapsock.c wraplib.c wrapunix.c
                         wrapstdio.c signal.c dg_echo.c dg_cli.c
                         tcp_connect.c tcp_listen.c udp_client.c
                         daemon_init.c sock_ntop_host.c sock_get_port.c host_serv.c
-                        ../libfree/in_cksum.c)
+                        ../libfree/in_cksum.c tv_sub.c)
 target_include_directories(
         unp
         PUBLIC "${PROJECT_SOURCE_DIR}/include"  # PUBLIC 表示使用该库的目标也包含此路径
